@@ -1,0 +1,47 @@
+{
+	"messages": [
+		{
+			"id": 0,
+			"text": "elit duis tristique sollicitudin nibh sit amet",
+			"username": "perseus",
+			"createdAt": "2020-03-05T23:26:10.537Z",
+			"likes": [
+				{
+					"id": 0,
+					"username": "spoon_828",
+					"messageId": 0,
+					"createdAt": "2020-03-05T23:26:10.537Z"
+				}
+			]
+		},
+		{
+			"id": 1,
+			"text": "metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta",
+			"username": "spoon_828",
+			"createdAt": "2020-03-05T23:27:58.795Z",
+			"likes": []
+		},
+		{
+			"id": 2,
+			"text": "consequat interdum varius sit",
+			"username": "top_hat",
+			"createdAt": "2020-03-05T23:29:22.853Z",
+			"likes": [
+				{
+					"id": 0,
+					"username": "perseus",
+					"messageId": 0,
+					"createdAt": "2020-03-05T23:29:22.853Z"
+				},
+				{
+					"id": 1,
+					"username": "spoon_828",
+					"messageId": 1,
+					"createdAt": "2020-03-05T23:30:46.942Z"
+				}
+			]
+		}
+	],
+	"count": 0,
+	"statusCode": 0
+}

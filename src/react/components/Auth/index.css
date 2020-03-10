@@ -1,0 +1,10 @@
+.LoginForm {
+	min-width: 275px;
+	width: 33vw;
+}
+
+.LoginForm_submit-options {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}

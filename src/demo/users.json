@@ -1,0 +1,42 @@
+{
+	"users": [
+		{
+			"username": "perseus",
+			"displayName": "Perseus",
+			"about": "naturally artificial",
+			"createdAt": "2020-03-05T23:05:19.729Z",
+			"updatedAt": "2020-03-05T23:05:19.729Z",
+			"pictureLocation": "https://i.pravatar.cc/256?img=68",
+			"googleId": null
+		},
+		{
+			"username": "spoon_828",
+			"displayName": "spoon",
+			"about": null,
+			"createdAt": "2020-03-05T23:09:53.031Z",
+			"updatedAt": "2020-03-05T23:09:53.031Z",
+			"pictureLocation": "https://i.pravatar.cc/256?img=16",
+			"googleId": null
+		},
+		{
+			"username": "top_hat",
+			"displayName": "Top Hat",
+			"about": null,
+			"createdAt": "2020-03-05T23:10:25.150Z",
+			"updatedAt": "2020-03-05T23:10:25.150Z",
+			"pictureLocation": "https://i.pravatar.cc/256?img=13",
+			"googleId": null
+		},
+		{
+			"username": "fil",
+			"displayName": "Filimon",
+			"about": null,
+			"createdAt": "2020-03-05T23:23:13.029Z",
+			"updatedAt": "2020-03-05T23:23:13.029Z",
+			"pictureLocation": "https://i.pravatar.cc/256?img=56",
+			"googleId": null
+		}
+	],
+	"count": 4,
+	"statusCode": 200
+}
