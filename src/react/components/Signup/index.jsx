@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from "react"
 import { Form, Loader } from "semantic-ui-react"
+import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { signup } from "../../../redux"
 
 class Signup extends Component {
-	state = { username: "", displayName: "", password: ""}
+	state = { redirect: false, username: "", displayName: "", password: "" }
 
 	handleSignup = event => {
 		event.preventDefault()
-		this.props.signup(this.state)
-			.then()
+		this.props.signup({ username: this.state.username, displayName: this.state.displayName, password: this.state.password })
+			.then(this.setState({ redirect: true }))
+			.catch(error => new Error(error.message))
 	}
 
 	handleChange = event => {
@@ -48,6 +50,7 @@ class Signup extends Component {
 			</Form>
 			{this.props.loading && <Loader active inline="centered" />}
 			{this.props.error && <p style={{ color: "red" }}>{this.props.error.message}</p>}
+			{this.state.redirect && <Redirect to="/" />}
 		</Fragment>
 	)
 }
