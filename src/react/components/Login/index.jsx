@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from "react"
+import { Link } from "react-router-dom"
 import { Form, Loader } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { login } from "../../../redux"
 import "./index.css"
 
-class Auth extends Component {
+class Login extends Component {
 	state = { username: "", password: "" }
 
-	handleAuth = event => {
+	handleLogin = event => {
 		event.preventDefault()
 		this.props.login(this.state)
 	}
@@ -16,9 +17,9 @@ class Auth extends Component {
 		this.setState({ [event.target.name]: event.target.value })
 	}
 
-	render = () =>
+	render = () => (
 		<Fragment>
-			<Form className="LoginForm" onSubmit={this.handleAuth}>
+			<Form className="LoginForm" onSubmit={this.handleLogin}>
 				<Form.Field className="LoginForm_input-fields">
 					<Form.Input
 						required
@@ -39,17 +40,19 @@ class Auth extends Component {
 						content="Login"
 						type="submit"
 						disabled={this.props.loading} />
-					<Form.Button
-						basic
-						color="red"
-						content="Register"
-						type="submit"
-						disabled={this.props.loading} />
+					<Link to="/">
+						<Form.Button
+							basic
+							color="red"
+							content="Signup"
+							disabled={this.props.loading} />
+					</Link>
 				</Form.Field>
 			</Form>
 			{this.props.loading && <Loader active inline="centered" />}
 			{this.props.error && <p style={{ color: "red" }}>{this.props.error.message}</p>}
 		</Fragment>
+	)
 }
 
 export default connect(
@@ -59,4 +62,4 @@ export default connect(
 		error: state.auth.login.error
 	}),
 	{ login }
-)(Auth)
+)(Login)

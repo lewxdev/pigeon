@@ -5,6 +5,7 @@ import { connectRouter } from "connected-react-router";
 import { reducers as authReducers } from "./auth";
 
 export * from "./auth";
+export * from "./users"
 
 export const history = createBrowserHistory({
   basename: process.env.PUBLIC_URL

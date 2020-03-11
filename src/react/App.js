@@ -1,16 +1,15 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
-import Lanuch from "./Launch"
-import Profile from "./Profile"
-import NotFound from "./NotFound"
+import { Launch, NotFound, Register, User } from "./routes"
 import "../index.css"
 
 class App extends React.Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path="/" component={Lanuch} />
-				<Route exact path="/profiles/:username" component={Profile} />
+				<Route exact path="/" component={Launch} />
+				<Route exact path="/signup" component={Register} />
+				<Route exact path="/user/:username" component={User} />
 				<Route path="*" component={NotFound} />
 			</Switch>
 		)
