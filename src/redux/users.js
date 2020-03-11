@@ -9,7 +9,7 @@ import {
 	createReducer
 } from "./helpers"
 
-const url = domain + "/user"
+const url = domain + "/users"
 
 const SIGNUP = createActions("signup")
 export const signup = signupData => dispatch => {
@@ -22,7 +22,7 @@ export const signup = signupData => dispatch => {
 	})
 		.then(handleJsonResponse)
 		.then(result => dispatch(SIGNUP.SUCCESS(result)))
-		.catch(err => Promise.reject(dispatch(SIGNUP.FAIL(err))))
+		.catch(error => Promise.reject(dispatch(SIGNUP.FAIL(error))))
 }
 
 export const reducers = {

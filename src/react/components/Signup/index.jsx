@@ -4,11 +4,12 @@ import { connect } from "react-redux"
 import { signup } from "../../../redux"
 
 class Signup extends Component {
-	state = { displayName: "", username: "", password: ""}
+	state = { username: "", displayName: "", password: ""}
 
 	handleSignup = event => {
 		event.preventDefault()
-		this.props.signup({ ...this.state, displayName: this.state.username })
+		this.props.signup(this.state)
+			.then()
 	}
 
 	handleChange = event => {

@@ -22,7 +22,7 @@ export const login = loginData => dispatch => {
 	})
 		.then(handleJsonResponse)
 		.then(result => dispatch(LOGIN.SUCCESS(result)))
-		.catch(err => Promise.reject(dispatch(LOGIN.FAIL(err))))
+		.catch(error => Promise.reject(dispatch(LOGIN.FAIL(error))))
 }
 
 const LOGOUT = createActions("logout")

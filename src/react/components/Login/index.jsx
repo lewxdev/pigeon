@@ -40,7 +40,7 @@ class Login extends Component {
 						content="Login"
 						type="submit"
 						disabled={this.props.loading} />
-					<Link to="/">
+					<Link to="/signup">
 						<Form.Button
 							basic
 							color="red"
