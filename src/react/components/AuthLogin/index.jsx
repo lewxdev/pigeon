@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { login } from "../../../redux"
 import "./index.css"
 
-class Login extends Component {
+class AuthLogin extends Component {
 	state = { username: "", password: "" }
 
 	handleLogin = event => {
@@ -36,7 +36,6 @@ class Login extends Component {
 				<Form.Field className="LoginForm_submit-options">
 					<Form.Button
 						basic
-						color="grey"
 						content="Login"
 						type="submit"
 						disabled={this.props.loading} />
@@ -62,4 +61,4 @@ export default connect(
 		error: state.auth.login.error
 	}),
 	{ login }
-)(Login)
+)(AuthLogin)

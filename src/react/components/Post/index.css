@@ -1,0 +1,23 @@
+.Post_wrapper {
+	border: 1px solid #979797;
+	border-radius: 12.5px;
+	padding: 0.5em 1em 1em 1em;
+	margin-bottom: 2.5em !important;
+}
+
+.Post {
+	position: relative;
+}
+
+.Post_user-picture {
+	padding-top: 0.5em;
+}
+
+.Post_like {
+	bottom: -2.75em;
+}
+
+.Post_timestamp, .Post_like {
+	position: absolute;
+	right: 0;
+}

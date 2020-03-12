@@ -1,6 +1,7 @@
-import Launch from "./Launch"
+import Home from "./Home"
+import Login from "./Login"
 import NotFound from "./NotFound"
-import Register from "./Register"
+import Signup from "./Signup"
 import User from "./User"
 
-export { Launch, NotFound, Register, User }
+export { Home, Login, NotFound, Signup, User }

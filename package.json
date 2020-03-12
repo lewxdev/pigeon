@@ -1,7 +1,7 @@
 {
-	"name": "kwitter",
+	"name": "pigeon",
 	"version": "0.1.0",
-	"homepage": "https://kaxkwitter.gitlab.io",
+	"homepage": "https://pigeonweb.gitlab.io",
 	"private": false,
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.2.5",
@@ -21,8 +21,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"build:graph-html": "depcruise --validate .dependency-cruiser.js --exclude '^node_modules' --output-type dot src | dot -T svg > dependencygraph.html"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

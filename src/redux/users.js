@@ -25,9 +25,25 @@ export const signup = signupData => dispatch => {
 		.catch(error => Promise.reject(dispatch(SIGNUP.FAIL(error))))
 }
 
+const GET = createActions("get")
+export const get = () => dispatch => {
+	dispatch(GET.START())
+
+	return fetch(url, {
+		method: "GET",
+		headers: jsonHeaders
+	})
+		.then(handleJsonResponse)
+		.then(result => dispatch(GET.SUCCESS(result)))
+		.catch(error => Promise.reject(dispatch(GET.FAIL(error))))
+}
+
 export const reducers = {
 	signup: createReducer(getInitStateFromStorage("signup", asyncInitialState), {
 		...asyncCases(SIGNUP),
 		[SIGNUP.SUCCESS.toString()]: (state, action) => asyncInitialState
+	}),
+	get: createReducer(asyncInitialState, {
+		...asyncCases(GET)
 	})
 }

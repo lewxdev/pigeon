@@ -1,0 +1,10 @@
+.SignupForm {
+	min-width: 275px;
+	width: 33vw;
+}
+
+.SignupForm_submit-options {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}

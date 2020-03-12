@@ -1,19 +1,17 @@
-import React from "react"
+import React, { Component } from "react"
 import { Switch, Route } from "react-router-dom"
-import { Launch, NotFound, Register, User } from "./routes"
-import "../index.css"
+import { Home, Login, NotFound, Signup, User } from "./routes"
 
-class App extends React.Component {
+export default class App extends Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path="/" component={Launch} />
-				<Route exact path="/signup" component={Register} />
+				<Route exact path="/" component={Home} />
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/signup" component={Signup} />
 				<Route exact path="/user/:username" component={User} />
 				<Route path="*" component={NotFound} />
 			</Switch>
 		)
 	}
 }
-
-export default App;

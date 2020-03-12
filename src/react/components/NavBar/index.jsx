@@ -3,16 +3,13 @@ import { connect } from "react-redux"
 import { logout } from "../../../redux"
 import { Link } from "react-router-dom"
 import { Menu, Image } from "semantic-ui-react"
-import user_icon from "../../../icons/svg/user.svg"
-import home_icon from "../../../icons/svg/home.svg"
-import settings_icon from "../../../icons/svg/settings.svg"
-import logout_icon from "../../../icons/svg/logout.svg"
+import { userIcon, homeIcon, settingsIcon, logoutIcon } from "../../../icons"
 import "./index.css"
 
 class NavBar extends Component {
-	state = { activeItem: "home" }
+	state = { activeItem: "user" }
 
-	handleSelect = (event, { name }) => this.setState({ activeItem: name })
+	handleSelect = (event) => this.setState({ activeItem: event.target.name })
 
 	handleLogout = event => {
 		event.preventDefault()
@@ -35,18 +32,18 @@ class NavBar extends Component {
 				<Menu.Item
 					active={this.state.activeItem === "user"}
 					style={{color:"#767676"}}>
-					<Image src={user_icon} fluid size="tiny" />
+					<Image src={userIcon} size="tiny" />
 				</Menu.Item>
 			</Link>
 			
 			<Link
-				to="/home"
+				to="/"
 				name="home"
 				onClick={this.handleSelect}>
 				<Menu.Item
 					active={this.state.activeItem === "home"}
 					style={{color:"#767676"}}>
-					<Image src={home_icon} fluid size="tiny" />
+					<Image src={homeIcon} size="tiny" />
 				</Menu.Item>
 			</Link>
 			
@@ -57,7 +54,7 @@ class NavBar extends Component {
 				<Menu.Item
 					active={this.state.activeItem === "settings"}
 					style={{color:"#767676"}}>
-					<Image src={settings_icon} fluid size="tiny" />
+					<Image src={settingsIcon} size="tiny" />
 				</Menu.Item>
 			</Link>
 			
@@ -66,7 +63,7 @@ class NavBar extends Component {
 				onClick={this.handleLogout}>
 				<Menu.Item
 					style={{color:"#767676"}}>
-					<Image src={logout_icon} fluid size="tiny" />
+					<Image src={logoutIcon} size="tiny" />
 				</Menu.Item>
 			</Link>
 		</Menu>
