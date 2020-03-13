@@ -26,7 +26,7 @@ export default class Post extends Component {
 		<Feed className="Post_wrapper">
 			<Feed.Event className="Post">
 				<Feed.Label className="Post_user-picture">
-					<img src={avatarIcon} />
+					<img alt={`@${this.props.username}'s Avatar`} src={avatarIcon} />
 				</Feed.Label>
 				<Feed.Content>
 					<Feed.Summary>

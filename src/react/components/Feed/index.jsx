@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { Feed as FeedUI } from "semantic-ui-react"
 import { Post } from "../../components"
 import { connect } from "react-redux"

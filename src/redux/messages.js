@@ -2,7 +2,6 @@ import {
 	domain,
 	jsonHeaders,
 	handleJsonResponse,
-	getInitStateFromStorage,
 	asyncInitialState,
 	asyncCases,
 	createActions,
