@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { Title, AuthLogin } from "../../components"
 import { userIsNotAuthenticated } from "../../HOCs"
+import "./index.css"
 
-class Launch extends Component {
+class Login extends Component {
 	render = () => (
-		<Fragment>
+		<section className="Login_wrapper">
 			<Title />
 			<AuthLogin />
-		</Fragment>
+		</section>
 	)
 }
 
-export default userIsNotAuthenticated(Launch)
+export default userIsNotAuthenticated(Login)

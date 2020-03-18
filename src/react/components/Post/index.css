@@ -1,8 +1,10 @@
 .Post_wrapper {
-	border: 1px solid #979797;
-	border-radius: 12.5px;
+	border-radius: 25px;
 	padding: 0.5em 1em 1em 1em;
 	margin-bottom: 2.5em !important;
+	background: #f0f0f0;
+	box-shadow: inset 3px 3px 24px -6px #0000001a,
+				3px 3px 24px -12px #ffffff1a;
 }
 
 .Post {
@@ -14,7 +16,17 @@
 }
 
 .Post_like {
+	display: flex;
+	align-items: center;
 	bottom: -2.75em;
+	font-size: 1em;
+	color: #000000b0;
+}
+
+.Post_like img {
+	height: 1em;
+	margin: 0 0.5em;
+	fill: #000000b0;
 }
 
 .Post_timestamp, .Post_like {

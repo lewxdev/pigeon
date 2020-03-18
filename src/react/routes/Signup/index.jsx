@@ -1,13 +1,14 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { Title, AuthSignup } from "../../components"
 import { userIsNotAuthenticated } from "../../HOCs"
+import "./index.css"
 
 class Signup extends Component {
 	render = () => (
-		<Fragment>
+		<section className="Signup_wrapper">
 			<Title />
 			<AuthSignup />
-		</Fragment>
+		</section>
 	)
 }
 
