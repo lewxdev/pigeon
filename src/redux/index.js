@@ -7,7 +7,6 @@ import { reducers as usersReducers } from "./users";
 import { reducers as messagesReducers } from "./messages"
 
 export * from "./auth";
-export * from "./likes"
 export * from "./messages"
 export * from "./users"
 
@@ -19,8 +18,8 @@ export const store = configureStore({
 	reducer: {
 		router: connectRouter(history),
 		auth: combineReducers(authReducers),
-		users: combineReducers(usersReducers),
-		messages: combineReducers(messagesReducers)
+		messages: combineReducers(messagesReducers),
+		users: combineReducers(usersReducers)
 	},
 	preloadedState: {},
 	devTools: process.env.NODE_ENV !== "production"
