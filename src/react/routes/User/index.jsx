@@ -1,14 +1,20 @@
-import React, { Component, Fragment } from "react"
-import NavBar from "../../components/NavBar"
-import { userIsAuthenticated } from "../../HOCs"
+import React, { Component, Fragment } from "react";
+import { Header } from "semantic-ui-react";
+import Card from "../../components/Profile";
+import { userIsAuthenticated } from "../../HOCs";
+import { NavBar, Feed } from "../../components";
 
 class User extends Component {
-	render = () => (
-		<Fragment>
-			<NavBar isAuthenticated={this.props.isAuthenticated} />
-			<h2>Profile</h2>
-		</Fragment>
-	)
+  render = () => (
+    <Fragment>
+      <Header>
+        <Card />
+      </Header>
+      <NavBar />
+
+      <Feed />
+    </Fragment>
+  );
 }
 
-export default userIsAuthenticated(User)
+export default userIsAuthenticated(User);
