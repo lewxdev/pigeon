@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { Feed, Image } from "semantic-ui-react"
-import { heartIcon, avatarIcon } from "../../../icons"
+import { heartIcon, heartFilledIcon, avatarIcon } from "../../../icons"
 import { connect } from "react-redux"
-import { get } from "../../../redux"
-import { domain } from "../../../redux/helpers"
+import { get, add, remove } from "../../../redux"
+import { domain, getInitStateFromStorage, asyncInitialState } from "../../../redux/helpers"
 import "./index.css"
 
 class Post extends Component {
@@ -31,6 +31,22 @@ class Post extends Component {
 		else return `${weeks} week${weeks > 1 ? "s" : ""}`
 	}
 
+	handleLikeStatus = () => {
+		const currentUsername = getInitStateFromStorage("login", asyncInitialState).result.username
+
+		if (this.props.likes.some(data => data.username === currentUsername))
+			return true
+	}
+
+	handleToggleLike = () => {
+		const currentUsername = getInitStateFromStorage("login", asyncInitialState).result.username
+
+		if (!this.handleLikeStatus()) 
+			this.props.add(this.props.id)
+		else
+			this.props.remove(this.props.likes.find(data => data.username === currentUsername).id)
+	}
+
 	render = () => (
 		<Feed className="Post_wrapper">
 			<Feed.Event className="Post">
@@ -48,8 +64,8 @@ class Post extends Component {
 							content={`${this.handleRelativeDate(this.props.createdAt)} ago`} />
 					</Feed.Summary>
 					<Feed.Extra text children={this.props.text} />
-						<Feed.Like className="Post_like">
-							<Image src={heartIcon} /> {this.props.likes.length}
+						<Feed.Like className="Post_like" onClick={this.handleToggleLike}>
+							<Image src={this.handleLikeStatus() ? heartFilledIcon : heartIcon} /> {this.props.likes.length}
 						</Feed.Like>
 				</Feed.Content>
 			</Feed.Event>
@@ -63,5 +79,5 @@ export default connect(
 		loading: state.users.get.loading,
 		error: state.users.get.error
 	}),
-	{ get }
+	{ get, add, remove }
 )(Post)

@@ -6,10 +6,6 @@ import { App } from "./react"
 import { store, history } from "./redux"
 import "./index.css"
 
-import { getInitStateFromStorage, asyncInitialState } from "./redux/helpers"
-
-// console.log(getInitStateFromStorage("login", asyncInitialState).result.token)
-
 ReactDOM.render(
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
