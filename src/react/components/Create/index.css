@@ -1,0 +1,14 @@
+.Create.Post {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.Create.Post_content {
+	width: 100%;
+}
+
+.Create.Post_content:focus {
+	outline: none;
+}

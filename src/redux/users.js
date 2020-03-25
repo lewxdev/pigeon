@@ -26,10 +26,10 @@ export const signup = signupData => dispatch => {
 }
 
 const GET = createActions("get")
-export const get = () => dispatch => {
+export const get = username => dispatch => {
 	dispatch(GET.START())
 
-	return fetch(url, {
+	return fetch(`${url}/${username}`, {
 		method: "GET",
 		headers: jsonHeaders
 	})

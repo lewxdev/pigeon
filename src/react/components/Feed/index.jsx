@@ -8,7 +8,7 @@ class Feed extends Component {
 	state = { messages: [] }
 
 	componentDidMount = () => {
-		this.props.list().then(result => this.setState({ messages: result.payload.messages }))
+		this.props.list(this.props.username).then(result => this.setState({ messages: result.payload.messages }))
 	}
 	
 	render = () => (

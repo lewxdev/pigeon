@@ -1,9 +1,18 @@
 import React, { Component } from "react"
 import { Feed, Image } from "semantic-ui-react"
 import { heartIcon, avatarIcon } from "../../../icons"
+import { connect } from "react-redux"
+import { get } from "../../../redux"
+import { domain } from "../../../redux/helpers"
 import "./index.css"
 
-export default class Post extends Component {
+class Post extends Component {
+	state = {}
+
+	componentDidMount = () => {
+		this.props.get(this.props.username).then(result => this.setState(result.payload.user))
+	}
+	
 	handleRelativeDate = date => {
 		let difference = new Date() - new Date(date)
 		const minutes = Math.floor(difference / 60000)
@@ -26,11 +35,12 @@ export default class Post extends Component {
 		<Feed className="Post_wrapper">
 			<Feed.Event className="Post">
 				<Feed.Label className="Post_user-picture">
-					<img alt={`@${this.props.username}'s Avatar`} src={avatarIcon} />
+					<img alt={`@${this.props.username}'s Avatar`} src={this.state.pictureLocation ? `${domain}${this.state.pictureLocation}` : avatarIcon} />
 				</Feed.Label>
 				<Feed.Content>
 					<Feed.Summary>
 						<Feed.User>
+							<div>{this.state.displayName}</div>
 							<div>@{this.props.username}</div>
 						</Feed.User>
 						<Feed.Date
@@ -46,3 +56,12 @@ export default class Post extends Component {
 		</Feed>
 	)
 }
+
+export default connect(
+	state => ({
+		result: state.users.get.result,
+		loading: state.users.get.loading,
+		error: state.users.get.error
+	}),
+	{ get }
+)(Post)
