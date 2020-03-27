@@ -1,16 +1,40 @@
 import React, { Component } from "react"
-import { Feed, Image } from "semantic-ui-react"
-import { heartIcon, heartFilledIcon, avatarIcon } from "../../../icons"
 import { connect } from "react-redux"
-import { get, add, remove } from "../../../redux"
-import { domain, getInitStateFromStorage, asyncInitialState } from "../../../redux/helpers"
+import { getUser, getMessage, deleteMessage, like, unlike } from "../../../redux"
+import { baseURL } from "../../../redux/helpers"
+
+import { Feed, Image } from "semantic-ui-react"
+import { deleteIcon, heartIcon, heartFilledIcon, avatarIcon } from "../../../icons"
 import "./index.css"
 
 class Post extends Component {
-	state = {}
+	state = {
+		userData: {},
+		messageData: this.props.initialMessageData
+	}
 
 	componentDidMount = () => {
-		this.props.get(this.props.username).then(result => this.setState(result.payload.user))
+		this.props.getUser(this.state.messageData.username)
+			.then(result => this.setState({ userData: result.payload.user }))
+
+		this.updateData = () => {
+			this.props.getMessage(this.state.messageData.id).then(result => {
+				this.setState({
+					messageData: {
+						relativeDate: this.handleRelativeDate(this.state.messageData.createdAt),
+						likes: [ result.payload.likes ],
+						...this.state.messageData
+					}
+				})
+			})
+		}
+		
+		this.updateData()
+		this.componentIntervalUpdate = setInterval(this.updateData, 60000)
+	}
+
+	componentWillUnmount = () => {
+		clearInterval(this.componentIntervalUpdate)
 	}
 	
 	handleRelativeDate = date => {
@@ -21,52 +45,77 @@ class Post extends Component {
 		const weeks = Math.floor(difference / 604800000)
 
 		if (difference < 60000)
-			return "a few seconds"
+			return "a few seconds ago"
 		else if (difference < 3600000)
-			return `${minutes} minute${minutes > 1 ? "s" : ""}`
+			return `${minutes} minute${minutes > 1 ? "s" : ""} ago`
 		else if (difference < 86400000)
-			return `${hours} hour${hours > 1 ? "s" : ""}`
+			return `${hours} hour${hours > 1 ? "s" : ""} ago`
 		else if (difference < 604800000)
-			return `${days} day${days > 1 ? "s" : ""}`
-		else return `${weeks} week${weeks > 1 ? "s" : ""}`
+			return `${days} day${days > 1 ? "s" : ""} ago`
+		else return `${weeks} week${weeks > 1 ? "s" : ""} ago`
 	}
 
-	handleLikeStatus = () => {
-		const currentUsername = getInitStateFromStorage("login", asyncInitialState).result.username
-
-		if (this.props.likes.some(data => data.username === currentUsername))
-			return true
+	currentUserLikesPost = () => {
+		if (this.state.messageData.likes
+			.some(data => data.username === this.props.currentUser))
+				return true
 	}
 
-	handleToggleLike = () => {
-		const currentUsername = getInitStateFromStorage("login", asyncInitialState).result.username
-
-		if (!this.handleLikeStatus()) 
-			this.props.add(this.props.id)
-		else
-			this.props.remove(this.props.likes.find(data => data.username === currentUsername).id)
+	toggleLike = () => {
+		const process = !this.currentUserLikesPost() ? "like" : "unlike"
+		const associatedId = !this.currentUserLikesPost() ? 
+			this.state.messageData.id :
+			this.state.messageData.likes.find(data => data.username === this.props.currentUser).id
+		
+		this.props[process](associatedId)
+			.then(result => {
+				if (process === "like")
+					this.setState({ 
+						messageData: { 
+							...this.state.messageData,
+							likes: [ ...this.state.messageData.likes, result.payload.like ]
+						}
+					})
+				else this.setState({
+					messageData: { 
+						...this.state.messageData,
+						likes: this.state.messageData.likes.filter(like => like.id !== result.payload.id)
+					}
+				})
+			})
 	}
 
 	render = () => (
 		<Feed className="Post_wrapper">
 			<Feed.Event className="Post">
 				<Feed.Label className="Post_user-picture">
-					<img alt={`@${this.props.username}'s Avatar`} src={this.state.pictureLocation ? `${domain}${this.state.pictureLocation}` : avatarIcon} />
+					<Image
+						avatar
+						alt={`@${this.props.username}'s Avatar`}
+						src={this.state.userData.pictureLocation ? baseURL + this.state.userData.pictureLocation : avatarIcon} />
 				</Feed.Label>
 				<Feed.Content>
 					<Feed.Summary>
-						<Feed.User>
-							<div>{this.state.displayName}</div>
-							<div>@{this.props.username}</div>
+						<Feed.User
+							href={`/user/${this.state.messageData.username}`} >
+							<div>{this.state.userData.displayName}</div>
+							<div>@{this.state.messageData.username}</div>
 						</Feed.User>
 						<Feed.Date
 							className="Post_timestamp"
-							content={`${this.handleRelativeDate(this.props.createdAt)} ago`} />
+							content={this.state.messageData.relativeDate} />
 					</Feed.Summary>
-					<Feed.Extra text children={this.props.text} />
-						<Feed.Like className="Post_like" onClick={this.handleToggleLike}>
-							<Image src={this.handleLikeStatus() ? heartFilledIcon : heartIcon} /> {this.props.likes.length}
+					<Feed.Extra text children={this.state.messageData.text} />
+					<div className="Post_meta-content">
+						<Feed.Like className="Post_like" onClick={this.toggleLike}>
+							<Image src={this.currentUserLikesPost() ? heartFilledIcon : heartIcon} />
+							{this.state.messageData.likes.length}
 						</Feed.Like>
+						{ this.state.messageData.username === this.props.currentUser && 
+							<Feed.Label className="Post_delete" onClick={this.props.handleDeletePost}>
+								<Image src={deleteIcon} />
+							</Feed.Label> }
+					</div>
 				</Feed.Content>
 			</Feed.Event>
 		</Feed>
@@ -74,10 +123,6 @@ class Post extends Component {
 }
 
 export default connect(
-	state => ({
-		result: state.users.get.result,
-		loading: state.users.get.loading,
-		error: state.users.get.error
-	}),
-	{ get, add, remove }
+	state => ({ currentUser: state.auth.login.result.username }),
+	{ getUser, getMessage, deleteMessage, like, unlike }
 )(Post)

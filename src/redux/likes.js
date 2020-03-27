@@ -1,48 +1,47 @@
 import {
-	domain,
-	jsonHeaders,
-	handleJsonResponse,
-	getInitStateFromStorage,
+	baseURL,
+	requestHeaders,
+	handleHTTPResponse,
 	asyncInitialState,
 	asyncCases,
 	createActions,
 	createReducer
 } from "./helpers"
 
-const url = domain + "/likes"
+const url = baseURL + "/likes"
 
-const ADD = createActions("add")
-export const add = id => (dispatch, getState) => {
-	dispatch(ADD.START())
+const LIKE = createActions("like")
+export const like = messageId => (dispatch, getState) => {
+	dispatch(LIKE.START())
+
+	const token = getState().auth.login.result.token
 
 	return fetch(url, {
 		method: "POST",
-		headers: { ...jsonHeaders, Authorization: "Bearer " + getInitStateFromStorage("login", asyncInitialState).result.token },
-		body: JSON.stringify({ messageId: id })
+		headers: { Authorization: "Bearer " + token, ...requestHeaders },
+		body: JSON.stringify({ messageId })
 	})
-		.then(handleJsonResponse)
-		.then(result => dispatch(ADD.SUCCESS(result)))
-		.catch(error => Promise.reject(dispatch(ADD.FAIL(error))))
+		.then(handleHTTPResponse)
+		.then(result => dispatch(LIKE.SUCCESS(result)))
+		.catch(error => Promise.reject(dispatch(LIKE.FAIL(error))))
 }
 
-const REMOVE = createActions("remove")
-export const remove = id => (dispatch, getState) => {
-	dispatch(REMOVE.START())
+const UNLIKE = createActions("unlike")
+export const unlike = likeId => (dispatch, getState) => {
+	dispatch(UNLIKE.START())
 
-	return fetch(`${url}/${id}`, {
+	const token = getState().auth.login.result.token
+
+	return fetch(`${url}/${likeId}`, {
 		method: "DELETE",
-		headers: { ...jsonHeaders, Authorization: "Bearer " + getInitStateFromStorage("login", asyncInitialState).result.token }
+		headers: { Authorization: "Bearer " + token, ...requestHeaders }
 	})
-		.then(handleJsonResponse)
-		.then(result => dispatch(REMOVE.SUCCESS(result)))
-		.catch(error => Promise.reject(dispatch(REMOVE.FAIL(error))))
+		.then(handleHTTPResponse)
+		.then(result => dispatch(UNLIKE.SUCCESS(result)))
+		.catch(error => Promise.reject(dispatch(UNLIKE.FAIL(error))))
 }
 
 export const reducers = {
-	add: createReducer(getInitStateFromStorage("login", asyncInitialState), {
-		...asyncCases(ADD)
-	}),
-	remove: createReducer(getInitStateFromStorage("login", asyncInitialState), {
-		...asyncCases(REMOVE)
-	}),
+	like: createReducer(asyncInitialState, { ...asyncCases(LIKE) }),
+	unlike: createReducer(asyncInitialState, { ...asyncCases(UNLIKE) }),
 }

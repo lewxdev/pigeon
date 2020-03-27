@@ -1,14 +1,13 @@
-.Create.Post {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.Create.Post_wrapper {
+	margin-bottom: 1.5em !important;
+	padding: 1em;
 }
 
-.Create.Post_content {
+.Create.Post_wrapper>.Post {
 	width: 100%;
 }
 
-.Create.Post_content:focus {
-	outline: none;
+.Create.Icon {
+	top: -0.233em !important;
+	right: 0 !important;
 }

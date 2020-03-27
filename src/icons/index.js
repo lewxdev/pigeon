@@ -1,3 +1,4 @@
+import deleteIcon from "./svg/delete.svg"
 import heartIcon from "./svg/heart.svg"
 import heartFilledIcon from "./svg/heart_filled.svg"
 import homeIcon from "./svg/home.svg"
@@ -8,5 +9,15 @@ import settingsIcon from "./svg/settings.svg"
 import userIcon from "./svg/user.svg"
 import avatarIcon from "./png/avatar_32.png"
 
-export { heartIcon, heartFilledIcon, homeIcon, loadingIcon, logoutIcon, oriBirdIcon, settingsIcon, userIcon }
+export {
+	deleteIcon,
+	heartIcon,
+	heartFilledIcon,
+	homeIcon,
+	loadingIcon,
+	logoutIcon,
+	oriBirdIcon,
+	settingsIcon,
+	userIcon
+}
 export { avatarIcon }

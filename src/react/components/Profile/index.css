@@ -1,3 +1,13 @@
+.Profile_wrapper {
+	margin: 1em 0 2.5em 0;
+}
+
 .Profile_wrapper img {
 	height: 1em;
+}
+
+.Profile_edit-avatar {
+	position: absolute;
+	right: 0;
+	bottom: 0.75em;
 }

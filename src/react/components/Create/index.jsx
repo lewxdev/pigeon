@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Form, Input } from "semantic-ui-react"
+import { Form, Input, Icon } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { create } from "../../../redux"
 import "../Post/index.css"
@@ -9,17 +9,28 @@ class Create extends Component {
 	state = { postContent: "" }
 
 	handleChange = event => {
-		this.setState({ postContent: event.target.value })
+		if (this.state.postContent.length < 255)
+			this.setState({ postContent: event.target.value })
+		else this.setState(prevState => prevState)
 	}
 
 	handleSubmit = event => {
 		event.preventDefault()
 		this.props.create(this.state.postContent)
+			.then(result => console.log(result.payload.message))
+			.then(this.setState({ postContent: "" }))
 	}
 
 	render = () => (
 		<Form className="Create Post_wrapper" onSubmit={this.handleSubmit}>
-			<Input onChange={this.handleChange} className="Post" transparent action="Post" fluid />
+			<Input
+				fluid
+				transparent
+				placeholder="What's on your mind?"
+				onChange={this.handleChange}
+				className="Post"
+				value={this.state.postContent}
+				icon={<Icon className="Create Icon" name="angle double right" circular />} />
 		</Form>
 	)
 }

@@ -2,20 +2,24 @@ import { createAction } from "@reduxjs/toolkit"
 
 export { createReducer } from "@reduxjs/toolkit"
 
-export const domain = "https://kwitter-api.herokuapp.com"
+export const baseURL = "https://kwitter-api.herokuapp.com"
 
-export const jsonHeaders = {
+export const requestHeaders = {
 	"Content-Type": "application/json",
-	Accept: "application/json"
+	"Accept": "application/json"
 }
 
-export const handleJsonResponse = response => {
+export const asyncInitialState = {
+	result: null,
+	loading: false,
+	error: null
+}
+
+export const handleHTTPResponse = response => {
 	if (response.ok)
 		return response.json()
-	else
-		return response.json().then(result => {
-			throw result
-		})
+	else return response.json()
+		.then(result => { throw result })
 }
 
 export const createActions = actionName => ({
@@ -23,12 +27,6 @@ export const createActions = actionName => ({
 	SUCCESS: createAction(actionName + "/success"),
 	FAIL: createAction(actionName + "/fail")
 })
-
-export const asyncInitialState = {
-	result: null,
-	loading: false,
-	error: null
-}
 
 export const asyncCases = ({ START, SUCCESS, FAIL }) => ({
 	[START]: (state, action) => {
@@ -50,15 +48,9 @@ export const getInitStateFromStorage = (key, initialState) => {
 
 	if (storedState) {
 		const unchangedInitialStateProps =
-			Object.keys(storedState).every(
-				property => initialState[property] !== undefined
-			) &&
-			Object.keys(initialState).every(
-				property => storedState[property] !== undefined
-			)
-		if (unchangedInitialStateProps) {
+			Object.keys(storedState).every(property => initialState[property] !== undefined) &&
+			Object.keys(initialState).every(property => storedState[property] !== undefined)
+		if (unchangedInitialStateProps)
 			return storedState
-		}
-	}
-	return initialState
+	} else return initialState
 }

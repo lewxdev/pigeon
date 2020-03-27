@@ -8,3 +8,9 @@ body {
 	justify-content: center;
 	background: #dde0ec;
 }
+
+#root {
+	width: 67vw;
+	min-width: 300px;
+	max-width: 600px;
+}

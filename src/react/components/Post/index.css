@@ -8,29 +8,39 @@
 
 .Post {
 	position: relative;
-	min-width: 275px;
-	width: 33vw;
 }
 
 .Post_user-picture {
 	padding-top: 0.5em;
 }
 
-.Post_like {
+.Post_meta-content {
 	display: flex;
 	align-items: center;
 	bottom: -2.75em;
+}
+
+.Post_like {
+	display: flex;
+	align-items: center;
 	font-size: 1em;
 	color: #000000b0;
 }
 
-.Post_like img {
-	height: 1em;
-	margin: 0 0.5em;
-	fill: #000000b0;
+.Post_delete:hover {
+	cursor: pointer;
 }
 
-.Post_timestamp, .Post_like {
+.Post_delete img, .Post_like img {
+	height: 1em;
+	margin: 0 0.5em;
+}
+
+.Post_delete img {
+	margin-right: 0;
+}
+
+.Post_timestamp, .Post_meta-content {
 	position: absolute;
 	right: 0;
 }

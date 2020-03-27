@@ -1,7 +1,7 @@
 import {
-	domain,
-	jsonHeaders,
-	handleJsonResponse,
+	baseURL,
+	requestHeaders,
+	handleHTTPResponse,
 	getInitStateFromStorage,
 	asyncInitialState,
 	asyncCases,
@@ -9,7 +9,7 @@ import {
 	createReducer
 } from "./helpers"
 
-const url = domain + "/auth"
+const url = baseURL + "/auth"
 
 const LOGIN = createActions("login")
 export const login = loginData => dispatch => {
@@ -17,10 +17,10 @@ export const login = loginData => dispatch => {
 
 	return fetch(url + "/login", {
 		method: "POST",
-		headers: jsonHeaders,
+		headers: requestHeaders,
 		body: JSON.stringify(loginData)
 	})
-		.then(handleJsonResponse)
+		.then(handleHTTPResponse)
 		.then(result => dispatch(LOGIN.SUCCESS(result)))
 		.catch(error => Promise.reject(dispatch(LOGIN.FAIL(error))))
 }
@@ -33,9 +33,9 @@ export const logout = () => (dispatch, getState) => {
 
 	return fetch(url + "/logout", {
 		method: "GET",
-		headers: { Authorization: "Bearer " + token, ...jsonHeaders }
+		headers: { Authorization: "Bearer " + token, ...requestHeaders }
 	})
-		.then(handleJsonResponse)
+		.then(handleHTTPResponse)
 		.then(result => dispatch(LOGOUT.SUCCESS(result)))
 		.catch(err => Promise.reject(dispatch(LOGOUT.FAIL(err))))
 }
@@ -45,7 +45,5 @@ export const reducers = {
 		...asyncCases(LOGIN),
 		[LOGOUT.SUCCESS.toString()]: (state, action) => asyncInitialState
 	}),
-	logout: createReducer(asyncInitialState, {
-		...asyncCases(LOGOUT)
-	})
+	logout: createReducer(asyncInitialState, { ...asyncCases(LOGOUT) })
 }
