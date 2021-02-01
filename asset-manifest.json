@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/pigeon/static/css/main.e20afbaf.chunk.css",
+    "main.js": "/pigeon/static/js/main.5625dfa0.chunk.js",
+    "main.js.map": "/pigeon/static/js/main.5625dfa0.chunk.js.map",
+    "runtime-main.js": "/pigeon/static/js/runtime-main.300e2173.js",
+    "runtime-main.js.map": "/pigeon/static/js/runtime-main.300e2173.js.map",
+    "static/js/2.f4ae5f14.chunk.js": "/pigeon/static/js/2.f4ae5f14.chunk.js",
+    "static/js/2.f4ae5f14.chunk.js.map": "/pigeon/static/js/2.f4ae5f14.chunk.js.map",
+    "index.html": "/pigeon/index.html",
+    "precache-manifest.f5d7943df01f85d71210d21c0dbfaf3f.js": "/pigeon/precache-manifest.f5d7943df01f85d71210d21c0dbfaf3f.js",
+    "service-worker.js": "/pigeon/service-worker.js",
+    "static/css/main.e20afbaf.chunk.css.map": "/pigeon/static/css/main.e20afbaf.chunk.css.map",
+    "static/media/delete.svg": "/pigeon/static/media/delete.cf1c0d66.svg",
+    "static/media/heart.svg": "/pigeon/static/media/heart.7746f5e4.svg",
+    "static/media/heart_filled.svg": "/pigeon/static/media/heart_filled.0f0a056e.svg",
+    "static/media/home.svg": "/pigeon/static/media/home.6598f834.svg",
+    "static/media/loading.svg": "/pigeon/static/media/loading.1dfa883d.svg",
+    "static/media/logout.svg": "/pigeon/static/media/logout.1c50a833.svg",
+    "static/media/ori_bird.svg": "/pigeon/static/media/ori_bird.b1ecdaea.svg",
+    "static/media/settings.svg": "/pigeon/static/media/settings.5a6ee94f.svg",
+    "static/media/user.svg": "/pigeon/static/media/user.a70d8f6d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.300e2173.js",
+    "static/js/2.f4ae5f14.chunk.js",
+    "static/css/main.e20afbaf.chunk.css",
+    "static/js/main.5625dfa0.chunk.js"
+  ]
+}
